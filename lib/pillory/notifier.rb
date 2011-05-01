@@ -1,5 +1,6 @@
 require 'net/http'
 require 'uri'
+require 'pillory/version'
 
 module Pillory
 
@@ -16,7 +17,8 @@ module Pillory
     end
 
     def notify
-      res = Net::HTTP.post_form(uri, output)
+      res = Net::HTTP.post_form(uri, params)
+      puts res.body
     end
 
     def uri
@@ -25,6 +27,13 @@ module Pillory
 
     def url
       options[:url]
+    end
+
+    def params
+      { :version  => Pillory::VERSION,
+        :pillory  => output,
+        :user     => `whoami`.strip,
+        :hostname => `hostname`.strip }
     end
 
   end

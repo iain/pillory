@@ -24,5 +24,4 @@ Gem::Specification.new do |s|
   s.add_dependency 'reek',                  '~> 1.2.8'
   s.add_dependency 'roodi',                 '~> 2.1.0'
   s.add_dependency 'rails_best_practices',  '~> 0.8.2'
-  s.add_dependency 'ansi',                  '~> 1.2.4'
 end

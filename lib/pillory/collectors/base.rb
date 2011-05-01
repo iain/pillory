@@ -1,4 +1,3 @@
-require 'ansi/code'
 require 'open3'
 
 module Pillory
@@ -6,7 +5,6 @@ module Pillory
   module Collectors
 
     class Base
-      include ANSI::Code
 
       attr_accessor :stdout, :stderr, :exit_status, :main
 
@@ -22,7 +20,7 @@ module Pillory
       end
 
       def run!
-        puts magenta { "Running #{self.class.to_s}" }
+        puts "Running #{self.class.to_s}"
         Dir.chdir path do
           @main = run
         end
