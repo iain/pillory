@@ -1,6 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'pillory/version'
+require 'yaml'
 
 module Pillory
 
@@ -31,7 +32,7 @@ module Pillory
 
     def params
       { :version  => Pillory::VERSION,
-        :pillory  => output,
+        :pillory  => output.to_yaml,
         :user     => `whoami`.strip,
         :hostname => `hostname`.strip }
     end
