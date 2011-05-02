@@ -28,7 +28,7 @@ module Pillory
     def default_configuration
       options[:global] = {
         :patterns => %w(app/**/*.rb lib/**/*.rb),
-        :color    => true
+        :color    => false
       }
       options[:collectors] = {
         :flay                 => { :enabled => true      },

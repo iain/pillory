@@ -1,14 +1,15 @@
 require 'cucumber/formatter/io'
 
+# using absolute path here, because the rest of the pillory gem is not loaded at this time
+# it might be outside the Gemfile
+require File.expand_path('../coverage_parser', __FILE__)
+
 module Pillory
 
   class CucumberFormatter
 
     def self.start
-      if RUBY_VERSION >= '1.9'
-        require 'coverage'
-        Coverage.start
-      end
+      Pillory::CoverageParser.start
     end
 
     include ::Cucumber::Formatter::Io
@@ -19,10 +20,7 @@ module Pillory
 
 
     def after_features(features)
-      if RUBY_VERSION >= '1.9'
-        result = Coverage.result.select { |k,v| k =~ /\A#{Dir.pwd}/ }
-        @io.puts result.to_yaml
-      end
+      @io.puts({ 'coverage' => Pillory::CoverageParser.stop }.to_yaml)
     end
 
   end

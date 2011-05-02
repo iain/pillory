@@ -1,19 +1,19 @@
 require 'rspec/core/formatters/base_formatter'
 
-if RUBY_VERSION >= '1.9'
-  require 'coverage'
-  Coverage.start
-end
+# using absolute path here, because the rest of the pillory gem is not loaded at this time
+# it might be outside the Gemfile
+require File.expand_path('../coverage_parser', __FILE__)
+
+
+Pillory::CoverageParser.start
+
 
 module Pillory
 
   class RspecFormatter < ::RSpec::Core::Formatters::BaseFormatter
 
     def start_dump
-      if RUBY_VERSION >= '1.9'
-        result = Coverage.result.select { |k,v| k =~ /\A#{Dir.pwd}/ }
-        output.puts result.to_yaml
-      end
+      output.puts({ 'coverage' => Pillory::CoverageParser.stop }.to_yaml)
     end
 
   end

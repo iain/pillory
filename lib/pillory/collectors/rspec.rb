@@ -13,7 +13,7 @@ module Pillory
         super
         @bin      = options[:bin]      || "rspec"
         @format   = options[:format]   || "progress"
-        @color    = options[:color]    || true
+        @color    = options[:color]    || false
         @specs    = options[:specs]    || "spec"
       end
 

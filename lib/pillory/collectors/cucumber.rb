@@ -12,7 +12,7 @@ module Pillory
         super
         @bin      = options[:bin]      || "cucumber"
         @format   = options[:format]   || "progress"
-        @color    = options[:color]    || true
+        @color    = options[:color]    || false
         @profile  = options[:profile]  || "default"
         @features = options[:features] || "features"
       end
