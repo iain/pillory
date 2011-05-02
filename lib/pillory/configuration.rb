@@ -39,6 +39,7 @@ module Pillory
         :reek                 => { :enabled => true      },
         :roodi                => { :enabled => true      },
         :rails_best_practices => { :enabled => rails?    },
+        :stats                => { :enabled => rails?    },
         :flog                 => { :enabled => true      }
       }
     end
