@@ -33,7 +33,7 @@ module Pillory
       options[:collectors] = {
         :flay                 => { :enabled => true      },
         :rspec                => { :enabled => rspec?    },
-        :git                  => { :enabled => git?      },
+        :misc                 => { :enabled => true      },
         :cucumber             => { :enabled => cucumber? },
         :changes              => { :enabled => git?      },
         :reek                 => { :enabled => true      },
