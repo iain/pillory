@@ -8,6 +8,7 @@ module Pillory
       if coverage?
         require 'coverage'
         Coverage.start
+        puts "Starting Coverage"
       end
     end
 
@@ -31,25 +32,15 @@ module Pillory
     end
 
     def parse
-      parsed = {}
-      result.each do |file, lines|
-        if include?(file)
-          parsed[file] = read_lines(file, lines)
-        end
-      end
-      parsed
+      Hash[ result.select { |file, lines| include?(file) } ]
     end
 
     def include?(file)
-      file =~ %r{\A#{Dir.pwd}}
+      tracked_files.inlude?(file)
     end
 
-    def read_lines(file, lines)
-      result = []
-      contents = File.open(file, 'r:utf-8').each_line.with_index do |line, index|
-        result << { line => lines[index] }
-      end
-      result
+    def tracked_files
+      @tracked_files ||= `git ls-files`.strip.split("\n").map { |file| File.join(Dir.pwd, file.strip) }
     end
 
   end
