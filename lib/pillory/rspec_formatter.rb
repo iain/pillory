@@ -34,7 +34,7 @@ module Pillory
           end
           [ attr.to_s, value ]
         end
-        Hash[attrs]
+        Hash[attrs].merge( 'describes' => example.example_group.describes.to_s )
       end
     end
 

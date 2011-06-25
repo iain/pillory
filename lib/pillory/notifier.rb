@@ -33,8 +33,21 @@ module Pillory
     def params
       { :version  => Pillory::VERSION,
         :pillory  => output.to_yaml,
-        :user     => `whoami`.strip,
-        :hostname => `hostname`.strip }
+        :user     => user,
+        :hostname => hostname,
+        :token    => token }
+    end
+
+    def token
+      options[:token]
+    end
+
+    def user
+      `whoami`.strip
+    end
+
+    def hostname
+      `hostname`.strip
     end
 
   end
